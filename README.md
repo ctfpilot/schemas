@@ -7,6 +7,7 @@ CTF Pilot utilizes various schemas to define the structure and format of differe
 We currently have the following schemas defined:
 
 - [CTF Challenge Schema](challenge/README.md): Defines the structure for describing CTF challenges, including properties such as name, category, difficulty and flags.
+- [Page Schema](page/README.md): Defines the structure for creating and managing pages within CTF Pilot, including content, metadata, and layout options.
 
 ## Contributing
 

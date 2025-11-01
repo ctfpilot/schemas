@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["enabled", "slug", "title", "route", "content", "format"],
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the page is enabled or not. If disabled, this forces the page to not be deployed or interacted with."
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "The slug of the page",
+      "examples": ["example-page"],
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the page",
+      "examples": ["Example Page"],
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "route": {
+      "type": "string",
+      "description": "The route of the page, used for navigation",
+      "examples": ["/example-page"],
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "content": {
+      "type": "string",
+      "pattern": "^([a-zA-Z0-9-_.]+\\.(md|html|txt))$",
+      "description": "The path to the content file for the page. This file should be located in the repository and contain the content of the page in Markdown or HTML format.",
+      "examples": ["page.md", "README.md", "example-page.md"],
+      "default": "page.md",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "auth": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the page requires authentication to view. If true, only authenticated users can access the page."
+    },
+    "draft": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the page is a draft or not. If true, this indicates that the page is still under development and not ready for public viewing."
+    },
+    "format": {
+      "type": "string",
+      "enum": ["markdown", "html"],
+      "default": "markdown",
+      "description": "The format of the page content. Can be either 'markdown' or 'html'. This determines how the content is rendered on the page."
+    }
+  }
+}
