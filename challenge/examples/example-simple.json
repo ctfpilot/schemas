@@ -1,0 +1,15 @@
+{
+  "$schema": "../schema.json",
+  "enabled": true,
+  "name": "Simple Demo Challenge",
+  "slug": "simple-demo-challenge",
+  "author": "FaNzu",
+  "category": "misc",
+  "difficulty": "beginner",
+  "type": "static",
+  "instanced_type": "none",
+  "flag": "flag{d3m0_fl4g}",
+  "points": 1000,
+  "min_points": 100,
+  "description_location": "description.md"
+}
