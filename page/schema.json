@@ -13,7 +13,7 @@
     "version": {
       "type": "string",
       "pattern": "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$",
-      "description": "The version of the challenge schema",
+      "description": "The version of the page schema",
       "examples": [
         "1",
         "1.0",

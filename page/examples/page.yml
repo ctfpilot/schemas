@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/page/schema.json
 
 enabled: true
 slug: "demo-page"
