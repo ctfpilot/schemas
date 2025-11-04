@@ -86,6 +86,7 @@ These are the explicit allowed values used by the schema and tooling.
 - `flag` (string | array | array of objects) — see Flags section below.
 - `points` (integer) — initial points awarded for solving.
 - `min_points` (integer) — floor for dynamic scoring.
+- `decay` (integer) — decay for dynamic scoring. Default: `75`.
 - `description_location` (string) — path to a file with the challenge description (e.g. `description.md`).
 - `prerequisites` (array[string]) — other challenge slugs that must be solved first.
 - `dockerfile_locations` (array[object]) — list of build instructions; each object has:
