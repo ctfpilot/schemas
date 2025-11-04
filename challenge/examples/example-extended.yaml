@@ -1,0 +1,35 @@
+# yaml-language-server: $schema: "https://github.com/ctfpilot/schemas/blob/main/challenge/schema.json"
+
+enabled: true
+name: "Extended Demo Challenge"
+slug: "extended-demo-challenge"
+author: Fanzu
+category: misc
+difficulty: medium
+tags:
+  - demo
+  - extended
+  - example
+type: static
+instanced_type: none
+instanced_name: extended-demo-challenge
+instanced_subdomains:
+  - app
+  - api
+connection: http://example.com
+flag:
+  - flag: flag{d3m0_fl4g_1}
+    case_sensitive: true
+  - flag: flag{d3m0_fl4g_2}
+    case_sensitive: false
+points: 1000
+decay: 75
+min_points: 100
+description_location: description.md
+prerequisites:
+  - simple-demo-challenge
+dockerfile_locations:
+  - location: demo/
+    context: demo/Dockerfile
+    identifier: web
+handout_dir: handout/
