@@ -1,7 +1,14 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "required": ["enabled", "slug", "title", "route", "content", "format"],
+  "required": [
+    "enabled",
+    "slug",
+    "title",
+    "route",
+    "content",
+    "format"
+  ],
   "properties": {
     "version": {
       "type": "string",
@@ -23,21 +30,27 @@
       "type": "string",
       "pattern": "^[a-z0-9-]+$",
       "description": "The slug of the page",
-      "examples": ["example-page"],
+      "examples": [
+        "example-page"
+      ],
       "minLength": 1,
       "maxLength": 50
     },
     "title": {
       "type": "string",
       "description": "The title of the page",
-      "examples": ["Example Page"],
+      "examples": [
+        "Example Page"
+      ],
       "minLength": 1,
       "maxLength": 100
     },
     "route": {
       "type": "string",
       "description": "The route of the page, used for navigation",
-      "examples": ["/example-page"],
+      "examples": [
+        "/example-page"
+      ],
       "minLength": 1,
       "maxLength": 100
     },
@@ -45,7 +58,11 @@
       "type": "string",
       "pattern": "^([a-zA-Z0-9-_.]+\\.(md|html|txt))$",
       "description": "The path to the content file for the page. This file should be located in the repository and contain the content of the page in Markdown or HTML format.",
-      "examples": ["page.md", "README.md", "example-page.md"],
+      "examples": [
+        "page.md",
+        "README.md",
+        "example-page.md"
+      ],
       "default": "page.md",
       "minLength": 1,
       "maxLength": 255
@@ -62,7 +79,10 @@
     },
     "format": {
       "type": "string",
-      "enum": ["markdown", "html"],
+      "enum": [
+        "markdown",
+        "html"
+      ],
       "default": "markdown",
       "description": "The format of the page content. Can be either 'markdown' or 'html'. This determines how the content is rendered on the page."
     }
