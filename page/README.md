@@ -91,16 +91,18 @@ JSON example (minimal):
 Add the following top-line to your YAML files to enable editor validation and autocompletion:
 
 ```yaml
-# yaml-language-server: $schema: "./schema.json"
+# yaml-language-server: $schema="https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/page/schema.json"
 ```
 
 Add the following to your JSON files to enable editor validation and autocompletion:
 
 ```json
 {
-  "$schema": "./schema.json"
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/page/schema.json"
 }
 ```
+
+*You may replace the URL with a local path to `schema.json` or to a specific version/release in the GitHub repository, such as with: `https://raw.githubusercontent.com/ctfpilot/schemas/refs/tags/vX.X.X/page/schema.json`.*
 
 ## Best practices and notes
 
