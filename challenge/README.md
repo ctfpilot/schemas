@@ -403,7 +403,7 @@ connection: http://example.com
 Add the following top-line to your YAML files to enable editor validation and autocompletion:
 
 ```yaml
-# yaml-language-server: $schema: "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
+# yaml-language-server: $schema="https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 ```
 
 Add the following to your JSON files to enable editor validation and autocompletion:
