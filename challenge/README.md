@@ -129,7 +129,7 @@ Each flag element may be `dynamic`, `null`, or a normal flag string. If `case_se
 ### Flag format
 
 The default flag format is `flag{...}`. However, the schema allows for 2-10 chars as the flag delimiters. For example, `FLAG[...]`, `CTF{...}`, `SECRET(...)`, etc.  
-The delimeter must be a word char (`a-z`, `A-Z`, `0-9`, `_`).
+The delimiter must be a word char (`a-z`, `A-Z`, `0-9`, `_`).
 
 If you want to use a set flag format for your CTF, you can fork the schema and modify the regex pattern for the `flag` field in the `schema.json` file. Look for the `flag` property and adjust the `pattern` attribute to match your desired format.
 
