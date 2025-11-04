@@ -1,5 +1,5 @@
 {
-    "$schema": "../schema.json",
+    "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json",
     "enabled": true,
     "name": "Extended Demo Challenge",
     "slug": "extended-demo-challenge",
@@ -7,8 +7,8 @@
     "category": "misc",
     "difficulty": "medium",
     "tags": ["demo", "extended", "example"],
-    "type": "static",
-    "instanced_type": "none",
+    "type": "shared",
+    "instanced_type": "web",
     "instanced_name": "extended-demo-challenge",
     "instanced_subdomains": ["app", "api"],
     "connection": "http://example.com",

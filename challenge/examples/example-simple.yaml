@@ -1,4 +1,4 @@
-# yaml-language-server: $schema: "https://github.com/ctfpilot/schemas/blob/main/challenge/schema.json"
+# yaml-language-server: $schema: "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 
 enabled: true
 name: "Simple Demo Challenge"

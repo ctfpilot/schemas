@@ -216,18 +216,18 @@ connection: http://example.com
 Add the following top-line to your YAML files to enable editor validation and autocompletion:
 
 ```yaml
-# yaml-language-server: $schema: "https://github.com/ctfpilot/schemas/blob/main/challenge/schema.json"
+# yaml-language-server: $schema: "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 ```
 
 Add the following to your JSON files to enable editor validation and autocompletion:
 
 ```json
 {
-  "$schema": "./schema.json"
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 }
 ```
 
-*You may replace the URL with a local path to `schema.json` or to a specific version/release in the GitHub repository, such as with: `https://github.com/ctfpilot/schemas/blob/vX.X.X/challenge/schema.json`.*
+*You may replace the URL with a local path to `schema.json` or to a specific version/release in the GitHub repository, such as with: `https://raw.githubusercontent.com/ctfpilot/schemas/refs/tags/vX.X.X/challenge/schema.json`.*
 
 ## Notes and best practices
 

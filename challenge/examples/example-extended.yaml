@@ -1,4 +1,4 @@
-# yaml-language-server: $schema: "https://github.com/ctfpilot/schemas/blob/main/challenge/schema.json"
+# yaml-language-server: $schema: "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 
 enabled: true
 name: "Extended Demo Challenge"
@@ -10,8 +10,8 @@ tags:
   - demo
   - extended
   - example
-type: static
-instanced_type: none
+type: instanced
+instanced_type: web
 instanced_name: extended-demo-challenge
 instanced_subdomains:
   - app
