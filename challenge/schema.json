@@ -12,6 +12,17 @@
 		"flag"
 	],
 	"properties": {
+		"version": {
+			"type": "string",
+			"pattern": "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$",
+			"description": "The version of the challenge schema",
+			"examples": [
+				"1",
+				"1.0",
+				"1.0.0"
+			],
+			"default": "1"
+		},
 		"enabled": {
 			"type": "boolean",
 			"default": true,

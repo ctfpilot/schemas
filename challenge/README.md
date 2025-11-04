@@ -71,6 +71,7 @@ These are the explicit allowed values used by the schema and tooling.
 
 ## Field reference (structure and examples)
 
+- `version` (string, optional) — schema version (e.g. `1.0.0` or `1`). Fully optional; if omitted the latest schema version is assumed.
 - `enabled` (boolean) — whether the challenge is active.
 - `name` (string) — e.g. "Demo Challenge".
 - `slug` (string) — e.g. `demo-challenge`.
@@ -86,7 +87,7 @@ These are the explicit allowed values used by the schema and tooling.
 - `flag` (string | array | array of objects) — see Flags section below.
 - `points` (integer) — initial points awarded for solving.
 - `min_points` (integer) — floor for dynamic scoring.
-- `decay` (integer) — decay for dynamic scoring. Default: `75`.
+- `decay` (integer, optional) — decay for dynamic scoring. Default: `75`.
 - `description_location` (string) — path to a file with the challenge description (e.g. `description.md`).
 - `prerequisites` (array[string]) — other challenge slugs that must be solved first.
 - `dockerfile_locations` (array[object]) — list of build instructions; each object has:
