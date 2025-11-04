@@ -63,7 +63,7 @@ This section lists the main validation constraints defined in the schema.
 YAML example (minimal):
 
 ```yaml
-# yaml-language-server: $schema=./schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/page/schema.json
 enabled: true
 slug: "demo-page"
 title: "Demo Page"
@@ -76,7 +76,7 @@ JSON example (minimal):
 
 ```json
 {
-  "$schema": "./schema.json",
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/page/schema.json",
   "enabled": true,
   "slug": "demo-page",
   "title": "Demo Page",
