@@ -71,6 +71,7 @@ These are the explicit allowed values used by the schema and tooling.
 
 ## Field reference (structure and examples)
 
+- `version` (string, optional) — schema version (e.g. `1.0.0` or `1`). Fully optional; if omitted the latest schema version is assumed.
 - `enabled` (boolean) — whether the challenge is active.
 - `name` (string) — e.g. "Demo Challenge".
 - `slug` (string) — e.g. `demo-challenge`.
@@ -86,6 +87,7 @@ These are the explicit allowed values used by the schema and tooling.
 - `flag` (string | array | array of objects) — see Flags section below.
 - `points` (integer) — initial points awarded for solving.
 - `min_points` (integer) — floor for dynamic scoring.
+- `decay` (integer, optional) — decay for dynamic scoring. Default: `75`.
 - `description_location` (string) — path to a file with the challenge description (e.g. `description.md`).
 - `prerequisites` (array[string]) — other challenge slugs that must be solved first.
 - `dockerfile_locations` (array[object]) — list of build instructions; each object has:
@@ -100,40 +102,97 @@ These are the explicit allowed values used by the schema and tooling.
 
 - Single string flag:
 
-```yaml
-flag: flag{flag}
-```
+  <details open>
+  <summary>YAML</summary>
+
+  ```yaml
+  flag: flag{flag}
+  ```
+
+  </details>
+
+  <details>
+  <summary>JSON</summary>
+
+  ```json
+  "flag": "flag{flag}"
+  ```
+
+  </details>
 
 - Array of string flags:
 
-```yaml
-flag:
-  - flag{flag1}
-  - flag{flag2}
-```
+  <details open>
+  <summary>YAML</summary>
+
+  ```yaml
+  flag:
+    - flag{flag1}
+    - flag{flag2}
+  ```
+
+  </details>
+
+  <details>
+  <summary>JSON</summary>
+
+  ```json
+  "flag": [
+    "flag{flag1}",
+    "flag{flag2}"
+  ]
+  ```
+
+  </details>
 
 - Array of objects (supporting case sensitivity and metadata):
 
-```yaml
-flag:
-  - flag: flag{flag1}
-    case_sensitive: true
-  - flag: flag{flag2}
-    case_sensitive: false
-```
+  <details open>
+  <summary>YAML</summary>
+
+  ```yaml
+  flag:
+    - flag: flag{flag1}
+      case_sensitive: true
+    - flag: flag{flag2}
+      case_sensitive: false
+  ```
+
+  </details>
+
+  <details>
+  <summary>JSON</summary>
+
+  ```json
+  "flag": [
+    {
+      "flag": "flag{flag1}",
+      "case_sensitive": true
+    },
+    {
+      "flag": "flag{flag2}",
+      "case_sensitive": false
+    }
+  ]
+  ```
+
+  </details>
 
 Each flag element may be `dynamic`, `null`, or a normal flag string. If `case_sensitive` is omitted, flag checking defaults to case-sensitive behavior.
 
 ### Flag format
 
 The default flag format is `flag{...}`. However, the schema allows for 2-10 chars as the flag delimiters. For example, `FLAG[...]`, `CTF{...}`, `SECRET(...)`, etc.  
-The delimeter must be a word char (`a-z`, `A-Z`, `0-9`, `_`).
+The delimiter must be a word char (`a-z`, `A-Z`, `0-9`, `_`).
 
 If you want to use a set flag format for your CTF, you can fork the schema and modify the regex pattern for the `flag` field in the `schema.json` file. Look for the `flag` property and adjust the `pattern` attribute to match your desired format.
 
 ## Dockerfile locations
 
 `dockerfile_locations` is an array of objects. Example:
+
+<details open>
+<summary>YAML</summary>
 
 ```yaml
 dockerfile_locations:
@@ -142,9 +201,31 @@ dockerfile_locations:
     identifier: web
 ```
 
+</details>
+
+<details>
+<summary>JSON</summary>
+
+```json
+"dockerfile_locations": [
+  {
+    "context": "demo/",
+    "location": "demo/Dockerfile",
+    "identifier": "web"
+  }
+]
+```
+
+</details>
+
+</br >
+
 This tells automation: from `demo/` context, use `demo/Dockerfile` and tag the resulting image using `identifier` when provided.
 
 The `identifier` field accepts either a string or `null` (i.e. `"type": ["string", "null"]` in the schema). Use `null`, an empty string, or the literal value `None` to indicate "no suffix" for the image tag. Example where no identifier/suffix is used:
+
+<details open>
+<summary>YAML</summary>
 
 ```yaml
 dockerfile_locations:
@@ -153,7 +234,27 @@ dockerfile_locations:
     identifier: null
 ```
 
-## Minimal YAML example
+</details>
+
+<details>
+<summary>JSON</summary>
+
+```json
+"dockerfile_locations": [
+  {
+    "context": "demo/",
+    "location": "demo/Dockerfile",
+    "identifier": null
+  }
+]
+```
+
+</details>
+
+## Minimal example
+
+<details open>
+<summary>YAML</summary>
 
 ```yaml
 enabled: true
@@ -170,7 +271,35 @@ min_points: 100
 description_location: "description.md"
 ```
 
+</details>
+
+<details>
+<summary>JSON</summary>
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json",
+  "enabled": true,
+  "name": "Demo Challenge",
+  "slug": "demo-challenge",
+  "author": "The Mikkel",
+  "category": "misc",
+  "difficulty": "easy",
+  "type": "static",
+  "instanced_type": "none",
+  "flag": "flag{d3m0_fl4g}",
+  "points": 1000,
+  "min_points": 100,
+  "description_location": "description.md"
+}
+```
+
+</details>
+
 ## Full example (advanced)
+
+<details open>
+<summary>YAML</summary>
 
 ```yaml
 enabled: true
@@ -209,23 +338,83 @@ handout_dir: handout
 connection: http://example.com
 ```
 
+</details>
+
+<details>
+<summary>JSON</summary>
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json",
+  "enabled": true,
+  "name": "Example Challenge",
+  "slug": "example-challenge",
+  "author": "John Smith",
+  "category": "web",
+  "difficulty": "easy",
+  "tags": [
+    "web",
+    "easy"
+  ],
+  "type": "static",
+  "instanced_type": "none",
+  "instanced_name": "example-challenge",
+  "instanced_subdomains": [
+    "example",
+    "test"
+  ],
+  "flag": [
+    {
+      "flag": "flag{flag1}",
+      "case_sensitive": true
+    },
+    {
+      "flag": "flag{flag2}",
+      "case_sensitive": false
+    }
+  ],
+  "points": 1000,
+  "min_points": 100,
+  "description_location": "description.md",
+  "prerequisites": [
+    "prerequisite-challenge"
+  ],
+  "dockerfile_locations": [
+    {
+      "location": "src/web/Dockerfile",
+      "context": "src/web/",
+      "identifier": "web"
+    },
+    {
+      "location": "src/bot/Dockerfile",
+      "context": "src/bot/",
+      "identifier": "bot"
+    }
+  ],
+  "handout_dir": "handout",
+  "connection": "http://example.com"
+}
+```
+
+</details>
+
 ## Linking to the schema
 
 Add the following top-line to your YAML files to enable editor validation and autocompletion:
 
 ```yaml
-# yaml-language-server: $schema: "https://github.com/ctfpilot/schemas/blob/main/challenge/schema.json"
+# yaml-language-server: $schema="https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 ```
 
 Add the following to your JSON files to enable editor validation and autocompletion:
 
 ```json
 {
-  "$schema": "./schema.json"
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json"
 }
 ```
 
-*You may replace the URL with a local path to `schema.json` or to a specific version/release in the GitHub repository, such as with: `https://github.com/ctfpilot/schemas/blob/vX.X.X/challenge/schema.json`.*
+*You may replace the URL with a local path to `schema.json` or to a specific version/release in the GitHub repository, such as with: `https://raw.githubusercontent.com/ctfpilot/schemas/refs/tags/vX.X.X/challenge/schema.json`.*
 
 ## Notes and best practices
 

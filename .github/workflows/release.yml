@@ -1,0 +1,16 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    name: Release
+    uses: the0mikkel/ci/.github/workflows/semver-release-standalone.yml@v1.4.0

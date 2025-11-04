@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json
 
 enabled: true
 name: "Demo Challenge"
@@ -11,10 +11,6 @@ tags:
   - "demo"
   - "example"
 instanced_type: "none"
-instanced_name: "demo-challenge"
-instanced_subdomains:
-  - "app"
-  - "api"
 flag: "flag{d3m0_fl4g}"
 points: 1000
 min_points: 100

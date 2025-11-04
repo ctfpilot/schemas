@@ -1,5 +1,5 @@
 {
-  "$schema": "../schema.json",
+  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json",
   "enabled": true,
   "name": "Demo Challenge",
   "slug": "demo-challenge",
@@ -9,8 +9,6 @@
   "tags": ["demo", "example"],
   "type": "static",
   "instanced_type": "none",
-  "instanced_name": "example-challenge",
-  "instanced_subdomains": ["app", "api"],
   "flag": "flag{d3m0_fl4g}",
   "points": 1000,
   "min_points": 100,

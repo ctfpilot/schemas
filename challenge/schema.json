@@ -12,6 +12,17 @@
 		"flag"
 	],
 	"properties": {
+		"version": {
+			"type": "string",
+			"pattern": "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$",
+			"description": "The version of the challenge schema",
+			"examples": [
+				"1",
+				"1.0",
+				"1.0.0"
+			],
+			"default": "1"
+		},
 		"enabled": {
 			"type": "boolean",
 			"default": true,
@@ -40,7 +51,7 @@
 			"type": "string",
 			"description": "The author of the challenge",
 			"examples": [
-				"John smith"
+				"John Smith"
 			],
 			"minLength": 1,
 			"maxLength": 100
@@ -58,6 +69,7 @@
 		},
 		"prerequisites": {
 			"type": "array",
+			"uniqueItems": true,
 			"items": {
 				"type": "string",
 				"description": "The prerequisites of the challenge. Must be the slugs of the challenges.",
@@ -106,7 +118,7 @@
 				"instanced"
 			],
 			"default": "static",
-			"description": "The type of challenge.\nStatic challenges represent challenges utalizing delivered files and information.\nShared challenges represent challenges that are hosted on a server and shared among multiple teams.\nInstanced challenges represent challenges that are hosted on a server and are unique to each user/team."
+			"description": "The type of challenge.\nStatic challenges represent challenges utilizing delivered files and information.\nShared challenges represent challenges that are hosted on a server and shared among multiple teams.\nInstanced challenges represent challenges that are hosted on a server and are unique to each user/team."
 		},
 		"instanced_type": {
 			"type": "string",
@@ -119,18 +131,22 @@
 			"description": "The type of instanced challenge.\nDefines how users interact with the challenge."
 		},
 		"instanced_name": {
-			"type": [
-				"string",
-				"null"
-			],
-			"default": null,
-			"description": "The slug of the instanced challenge. This is applicable if the `type` is `instanced` and another instance is used instead of itself. May also be itself to specify that the challenge is instanced but does not use another instance.",
-			"pattern": "^[a-z0-9-]+$",
-			"examples": [
-				"example-challenge"
-			],
-			"minLength": 1,
-			"maxLength": 50
+			"oneOf": [
+				{
+					"type": "null"
+				},
+				{
+					"type": "string",
+					"default": null,
+					"description": "The slug of the instanced challenge. This is applicable if the `type` is `instanced` and another instance is used instead of itself. May also be itself to specify that the challenge is instanced but does not use another instance.",
+					"pattern": "^[a-z0-9-]+$",
+					"examples": [
+						"example-challenge"
+					],
+					"minLength": 1,
+					"maxLength": 50
+				}
+			]
 		},
 		"instanced_subdomains": {
 			"type": "array",
@@ -201,7 +217,7 @@
 			"oneOf": [
 				{
 					"type": "string",
-					"pattern": "^(((\\w{2,10}){.*})|(dynamic|null))$",
+					"pattern": "^(\\w{2,10}\\{[^}]*\\}|dynamic|null)$",
 					"minLength": 4,
 					"maxLength": 100
 				},
@@ -211,16 +227,19 @@
 						"oneOf": [
 							{
 								"type": "string",
-								"pattern": "^(((\\w{2,10}){.*})|(dynamic|null))$",
+								"pattern": "^(\\w{2,10}\\{[^}]*\\}|dynamic|null)$",
 								"minLength": 4,
 								"maxLength": 100
 							},
 							{
 								"type": "object",
+								"required": [
+									"flag"
+								],
 								"properties": {
 									"flag": {
 										"type": "string",
-										"pattern": "^(((\\w{2,10}){.*})|(dynamic|null))$",
+										"pattern": "^(\\w{2,10}\\{[^}]*\\}|dynamic|null)$",
 										"minLength": 4,
 										"maxLength": 100
 									},
@@ -240,7 +259,7 @@
 					"minItems": 1
 				}
 			],
-			"description": "The flag of the challenge. May be a single string or an array of strings. Each may be 'dynamic', 'null', or a flag like 'flag{...}'. `flag` may be replaced with between 2 and 10 word chars. If case sensitivity is not explicitly specified, the flag is case insensitive.",
+			"description": "The flag of the challenge. May be a single string or an array of strings. Each may be 'dynamic', 'null', or a flag like 'flag{...}'. `flag` may be replaced with between 2 and 10 word chars. If case sensitivity is not explicitly specified, the flag is case sensitive.",
 			"examples": [
 				"flag{flag}",
 				[
@@ -263,7 +282,7 @@
 			"type": "string",
 			"description": "The location of the description file relative to the challenge directory",
 			"default": "description.md",
-			"pattern": "^[a-zA-Z0-9-_/]+.md$",
+			"pattern": "^[a-zA-Z0-9-_\/.]+\\.md$",
 			"examples": [
 				"description.md"
 			]
@@ -272,11 +291,15 @@
 			"type": "array",
 			"items": {
 				"type": "object",
+				"required": [
+					"location",
+					"context"
+				],
 				"properties": {
 					"location": {
 						"type": "string",
 						"description": "The location of the Dockerfile relative to the challenge directory",
-						"pattern": "^[a-zA-Z0-9-_/.]+$",
+						"pattern": "^[a-zA-Z0-9-_\/.]+$",
 						"examples": [
 							"src/Dockerfile"
 						]
@@ -284,7 +307,7 @@
 					"context": {
 						"type": "string",
 						"description": "The context of the Dockerfile relative to the challenge directory",
-						"pattern": "^[a-zA-Z0-9-_/.]+$",
+						"pattern": "^[a-zA-Z0-9-_\/.]+$",
 						"examples": [
 							"src/"
 						]
@@ -309,7 +332,7 @@
 			"type": "string",
 			"description": "The location of the handout directory relative to the challenge directory. Handout directory contains all files that are handed out to users (zipped to a single file that are stored in <category>_<slug>.zip in the files directory).",
 			"default": "handout",
-			"pattern": "^[a-zA-Z0-9-_/]+$",
+			"pattern": "^[a-zA-Z0-9-_\/]+$",
 			"examples": [
 				"handout"
 			]
