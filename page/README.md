@@ -18,6 +18,7 @@ At minimum a page object SHOULD include the following properties (the schema lis
 
 This section lists the main validation constraints defined in the schema.
 
+- `version` (string, optional) — schema version (e.g. `1.0.0` or `1`). Fully optional; if omitted the latest schema version is assumed.
 - `enabled`: boolean. Default `true`.
 - `slug`: string matching regex `^[a-z0-9-]+$`. Min length 1, max length 50.
 - `title`: string. Min length 1, max length 100.
