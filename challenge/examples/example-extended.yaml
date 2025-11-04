@@ -29,7 +29,7 @@ description_location: description.md
 prerequisites:
   - simple-demo-challenge
 dockerfile_locations:
-  - location: demo/
-    context: demo/Dockerfile
+  - location: demo/Dockerfile
+    context: demo/
     identifier: web
 handout_dir: handout/

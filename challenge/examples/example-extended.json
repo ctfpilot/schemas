@@ -7,7 +7,7 @@
     "category": "misc",
     "difficulty": "medium",
     "tags": ["demo", "extended", "example"],
-    "type": "shared",
+    "type": "instanced",
     "instanced_type": "web",
     "instanced_name": "extended-demo-challenge",
     "instanced_subdomains": ["app", "api"],
