@@ -51,7 +51,7 @@
 			"type": "string",
 			"description": "The author of the challenge",
 			"examples": [
-				"John smith"
+				"John Smith"
 			],
 			"minLength": 1,
 			"maxLength": 100
