@@ -298,7 +298,7 @@ description_location: "description.md"
 
 </details>
 
-### list of examples
+### List of Examples
 
 A full list of examples can be found in the [examples folder](examples/), but the most needed ones are:
 
