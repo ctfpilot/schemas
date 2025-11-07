@@ -251,7 +251,9 @@ dockerfile_locations:
 
 </details>
 
-## Minimal example
+## Examples
+
+The simplest challenge needs all the required fields:
 
 <details open>
 <summary>YAML</summary>
@@ -296,107 +298,16 @@ description_location: "description.md"
 
 </details>
 
-## Full example (advanced)
+### list of examples
 
-<details open>
-<summary>YAML</summary>
+A full list of examples can be found in the [examples folder](examples/), but the most needed ones are:
 
-```yaml
-enabled: true
-name: "Example Challenge"
-slug: "example-challenge"
-author: John Smith
-category: web
-difficulty: easy
-tags:
-  - web
-  - easy
-type: static
-instanced_type: none
-instanced_name: example-challenge
-instanced_subdomains:
-  - example
-  - test
-flag:
-  - flag: flag{flag1}
-    case_sensitive: true
-  - flag: flag{flag2}
-    case_sensitive: false
-points: 1000
-min_points: 100
-description_location: description.md
-prerequisites:
-  - prerequisite-challenge
-dockerfile_locations:
-  - location: src/web/Dockerfile
-    context: src/web/
-    identifier: web
-  - location: src/bot/Dockerfile
-    context: src/bot/
-    identifier: bot
-handout_dir: handout
-connection: http://example.com
-```
-
-</details>
-
-<details>
-<summary>JSON</summary>
-
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json",
-  "enabled": true,
-  "name": "Example Challenge",
-  "slug": "example-challenge",
-  "author": "John Smith",
-  "category": "web",
-  "difficulty": "easy",
-  "tags": [
-    "web",
-    "easy"
-  ],
-  "type": "static",
-  "instanced_type": "none",
-  "instanced_name": "example-challenge",
-  "instanced_subdomains": [
-    "example",
-    "test"
-  ],
-  "flag": [
-    {
-      "flag": "flag{flag1}",
-      "case_sensitive": true
-    },
-    {
-      "flag": "flag{flag2}",
-      "case_sensitive": false
-    }
-  ],
-  "points": 1000,
-  "min_points": 100,
-  "description_location": "description.md",
-  "prerequisites": [
-    "prerequisite-challenge"
-  ],
-  "dockerfile_locations": [
-    {
-      "location": "src/web/Dockerfile",
-      "context": "src/web/",
-      "identifier": "web"
-    },
-    {
-      "location": "src/bot/Dockerfile",
-      "context": "src/bot/",
-      "identifier": "bot"
-    }
-  ],
-  "handout_dir": "handout",
-  "connection": "http://example.com"
-}
-```
-
-</details>
+- Simple
+  - [YAML required fields only](examples/example-simple.yaml)
+  - [JSON required fields only](examples/example-simple.json)
+- Extended
+  - [YAML all possible fields](examples/example-extended.yaml)
+  - [JSON all possible fields](examples/example-extended.json)
 
 ## Linking to the schema
 
