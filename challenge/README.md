@@ -124,6 +124,26 @@ flag:
     case_sensitive: false
 ```
 
+<details>
+  <summary>Json example</summary>
+
+```json
+{
+  "flag": [
+    {
+      "flag": "flag{d3m0_fl4g_1}",
+      "case_sensitive": true
+    },
+    {
+      "flag": "flag{d3m0_fl4g_2}",
+      "case_sensitive": false
+    }
+  ]
+}
+```
+
+</details>
+
 Each flag element may be `dynamic`, `null`, or a normal flag string. If `case_sensitive` is omitted, flag checking defaults to case-sensitive behavior.
 
 ### Flag format
@@ -155,7 +175,9 @@ dockerfile_locations:
     identifier: null
 ```
 
-## Minimal YAML example
+## Examples
+
+The simplest challenge needs all the required fields:
 
 ```yaml
 enabled: true
@@ -172,44 +194,39 @@ min_points: 100
 description_location: "description.md"
 ```
 
-## Full example (advanced)
+<details>
+  <summary>Json example</summary>
 
-```yaml
-enabled: true
-name: "Example Challenge"
-slug: "example-challenge"
-author: John Smith
-category: web
-difficulty: easy
-tags:
-  - web
-  - easy
-type: static
-instanced_type: none
-instanced_name: example-challenge
-instanced_subdomains:
-  - example
-  - test
-flag:
-  - flag: flag{flag1}
-    case_sensitive: true
-  - flag: flag{flag2}
-    case_sensitive: false
-points: 1000
-min_points: 100
-description_location: description.md
-prerequisites:
-  - prerequisite-challenge
-dockerfile_locations:
-  - location: src/web/Dockerfile
-    context: src/web/
-    identifier: web
-  - location: src/bot/Dockerfile
-    context: src/bot/
-    identifier: bot
-handout_dir: handout
-connection: http://example.com
+```json
+{
+  "$schema": "../schema.json",
+  "enabled": true,
+  "name": "Demo Challenge",
+  "slug": "demo-challenge",
+  "author": "The Mikkel",
+  "category": "misc",
+  "difficulty": "easy",
+  "type": "static",
+  "instanced_type": "none",
+  "flag": "flag{d3m0_fl4g}",
+  "points": 1000,
+  "min_points": 100,
+  "description_location": "description.md"
+}
 ```
+
+</details>
+
+### list of examples
+
+A full list of examples can be found in the [examples folder](examples/), but the most needed ones are:
+
+- Simple
+  - [YAML required fields only](examples/example-simple.yaml)
+  - [JSON required fields only](examples/example-simple.json)
+- Extended
+  - [YAML all possible fields](examples/example-extended.yaml)
+  - [JSON all possible fields](examples/example-extended.json)
 
 ## Linking to the schema
 

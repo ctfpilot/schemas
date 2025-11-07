@@ -14,8 +14,8 @@
     "connection": "http://example.com",
     "flag": [
         {
-        "flag": "flag{d3m0_fl4g_1}",
-        "case_sensitive": true
+            "flag": "flag{d3m0_fl4g_1}",
+            "case_sensitive": true
         },
         {
             "flag": "flag{d3m0_fl4g_2}",
@@ -29,9 +29,9 @@
     "prerequisites": ["simple-demo-challenge"],
     "dockerfile_locations": [
         {
-        "location": "demo/Dockerfile",
-        "context": "demo/",
-        "identifier": "web"
+            "location": "demo/Dockerfile",
+            "context": "demo/",
+            "identifier": "web"
         }
     ],
     "handout_dir": "handout/"
