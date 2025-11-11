@@ -13,4 +13,5 @@ jobs:
       packages: write
       id-token: write
     name: Release
+    if: github.repository == 'ctfpilot/challenge-schema'
     uses: the0mikkel/ci/.github/workflows/semver-release-standalone.yml@v1.4.0
