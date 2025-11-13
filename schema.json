@@ -153,13 +153,15 @@
 			"items": {
 				"type": "string",
 				"pattern": "^((web|tcp):)?[a-z0-9-]+$",
-				"description": "The subdomain of the instanced challenge. This is applicable if the `type` is `instanced` and the challenge is hosted on a server. It will be prefixed with the instanced domain.",
+				"description": "The subdomain of the instanced challenge. This is applicable if the `type` is `instanced` and the challenge is hosted on a server. It will be prefixed with the instanced domain. Each entry may optionally be prefixed with `web:` or `tcp:` (e.g., `web:api`, `tcp:service`, or just `admin`). The prefix indicates the protocol associated with the subdomain.",
 				"minLength": 0,
 				"maxLength": 10,
 				"examples": [
 					"web",
 					"admin",
-					"api"
+					"api",
+					"tcp:service",
+					"web:dashboard"
 				]
 			},
 			"description": "The subdomains of the instanced challenge. This is applicable if the `type` is `instanced` and the challenge is hosted on a server. It will be prefixed with the instanced domain.",

@@ -82,7 +82,8 @@ These are the explicit allowed values used by the schema and tooling.
 - `type` (string) — `static`, `shared`, or `instanced`.
 - `instanced_type` (string) — `web`, `tcp`, or `none`.
 - `instanced_name` (string, optional) — slug of the instanced challenge. If omitted the challenge `slug` is typically used.
-- `instanced_subdomains` (array[string], optional) — list of subdomains (each matching `^[a-z0-9-]+$`) used for instanced web challenges.
+- `instanced_subdomains` (array[string], optional) — list of subdomains used for instanced web challenges.  
+  Each entry may optionally be prefixed with `web:` or `tcp:` (e.g., `web:api`, `tcp:service`, or just `admin`). The prefix indicates the protocol associated with the subdomain. All entries must match the pattern `^((web|tcp):)?[a-z0-9-]+$`.
 - `connection` (string, optional) — a connection URI or host:port string for `shared` challenges (max length 255).
 - `flag` (string | array | array of objects) — see Flags section below.
 - `points` (integer) — initial points awarded for solving.
