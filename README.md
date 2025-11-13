@@ -11,7 +11,7 @@ Examples of the schema in use can be found in the [examples](./examples) directo
 The schema is an object. At minimum a challenge SHOULD include the following fields:
 
 - `enabled` (boolean) - whether the challenge is enabled. Default: `true`.
-- `name` (string) - - human-readable name of the challenge.
+- `name` (string) - human-readable name of the challenge.
 - `slug` (string) - machine-friendly slug. Must match the regex `^[a-z0-9-]+$`.
 - `author` (string) - author or owner of the challenge.
 - `category` (string) - [see allowed values](#allowed-enumerations-and-constraints).
@@ -20,8 +20,8 @@ The schema is an object. At minimum a challenge SHOULD include the following fie
 - `type` (string) - `static` | `shared` | `instanced`.
 - `instanced_type` (string, optional) - `web` | `tcp` | `none` (useful for `instanced` challenges).
 - `flag` (string | array | array of objects) - one or more flags (see Flags section).
-- `points` (integer) - starting point value (1..10000). Default 1000.
-- `min_points` (integer) - minimum point value (1..1000). Default 100.
+- `points` (integer, optional) - starting point value (1..10000). Default 1000.
+- `min_points` (integer, optional) - minimum point value (1..1000). Default 100.
 
 See all value types in [Field reference](#field-reference-structure-and-examples).
 
