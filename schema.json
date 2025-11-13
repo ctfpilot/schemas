@@ -1,0 +1,343 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"required": [
+		"enabled",
+		"name",
+		"slug",
+		"author",
+		"category",
+		"difficulty",
+		"type",
+		"flag"
+	],
+	"properties": {
+		"version": {
+			"type": "string",
+			"pattern": "^(\\d+\\.)?(\\d+\\.)?(\\*|\\d+)$",
+			"description": "The version of the challenge schema",
+			"examples": [
+				"1",
+				"1.0",
+				"1.0.0"
+			],
+			"default": "1"
+		},
+		"enabled": {
+			"type": "boolean",
+			"default": true,
+			"description": "Whether the challenge is enabled or not. If disabled, this forces the challenge to not be deployed or interacted with.\nShould only be false if the challenge is not ready."
+		},
+		"name": {
+			"type": "string",
+			"description": "The name of the challenge",
+			"examples": [
+				"Example Challenge"
+			],
+			"minLength": 1,
+			"maxLength": 50
+		},
+		"slug": {
+			"type": "string",
+			"pattern": "^[a-z0-9-]+$",
+			"description": "The slug of the challenge",
+			"examples": [
+				"example-challenge"
+			],
+			"minLength": 1,
+			"maxLength": 50
+		},
+		"author": {
+			"type": "string",
+			"description": "The author of the challenge",
+			"examples": [
+				"John Smith"
+			],
+			"minLength": 1,
+			"maxLength": 100
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^[a-zA-Z0-9-_:;? ]+$",
+				"minLength": 1,
+				"maxLength": 50
+			},
+			"description": "Tags for the challenge. Used for filtering and searching.",
+			"default": []
+		},
+		"prerequisites": {
+			"type": "array",
+			"uniqueItems": true,
+			"items": {
+				"type": "string",
+				"description": "The prerequisites of the challenge. Must be the slugs of the challenges.",
+				"pattern": "^[a-z0-9-]+$",
+				"minLength": 1,
+				"maxLength": 100
+			},
+			"description": "Required challenges to solve before this challenge can be displayed"
+		},
+		"category": {
+			"type": "string",
+			"description": "The category of the challenge",
+			"enum": [
+				"web",
+				"forensics",
+				"rev",
+				"crypto",
+				"pwn",
+				"boot2root",
+				"osint",
+				"misc",
+				"blockchain",
+				"mobile",
+				"test"
+			]
+		},
+		"difficulty": {
+			"type": "string",
+			"enum": [
+				"beginner",
+				"easy",
+				"easy-medium",
+				"medium",
+				"medium-hard",
+				"hard",
+				"very-hard",
+				"insane"
+			],
+			"description": "The difficulty of the challenge"
+		},
+		"type": {
+			"type": "string",
+			"enum": [
+				"static",
+				"shared",
+				"instanced"
+			],
+			"default": "static",
+			"description": "The type of challenge.\nStatic challenges represent challenges utilizing delivered files and information.\nShared challenges represent challenges that are hosted on a server and shared among multiple teams.\nInstanced challenges represent challenges that are hosted on a server and are unique to each user/team."
+		},
+		"instanced_type": {
+			"type": "string",
+			"enum": [
+				"web",
+				"tcp",
+				"none"
+			],
+			"default": "none",
+			"description": "The type of instanced challenge.\nDefines how users interact with the challenge."
+		},
+		"instanced_name": {
+			"oneOf": [
+				{
+					"type": "null"
+				},
+				{
+					"type": "string",
+					"default": null,
+					"description": "The slug of the instanced challenge. This is applicable if the `type` is `instanced` and another instance is used instead of itself. May also be itself to specify that the challenge is instanced but does not use another instance.",
+					"pattern": "^[a-z0-9-]+$",
+					"examples": [
+						"example-challenge"
+					],
+					"minLength": 1,
+					"maxLength": 50
+				}
+			]
+		},
+		"instanced_subdomains": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"pattern": "^((web|tcp):)?[a-z0-9-]+$",
+				"description": "The subdomain of the instanced challenge. This is applicable if the `type` is `instanced` and the challenge is hosted on a server. It will be prefixed with the instanced domain. Each entry may optionally be prefixed with `web:` or `tcp:` (e.g., `web:api`, `tcp:service`, or just `admin`). The prefix indicates the protocol associated with the subdomain.",
+				"minLength": 0,
+				"maxLength": 10,
+				"examples": [
+					"web",
+					"admin",
+					"api",
+					"tcp:service",
+					"web:dashboard"
+				]
+			},
+			"description": "The subdomains of the instanced challenge. This is applicable if the `type` is `instanced` and the challenge is hosted on a server. It will be prefixed with the instanced domain.",
+			"default": [],
+			"minItems": 0,
+			"maxItems": 5,
+			"uniqueItems": true,
+			"examples": [
+				[
+					"web",
+					"admin",
+					"api"
+				],
+				[
+					"api"
+				]
+			]
+		},
+		"connection": {
+			"type": [
+				"string",
+				"null"
+			],
+			"default": null,
+			"description": "The connection string for the challenge. This is applicable if the `type` is not `instanced` and the challenge is hosted on a server. It is used to display connection information for the challenge. You can use the variable `${host}` in the string, which will be replaced with the website domain when rendered.",
+			"maxLength": 255,
+			"examples": [
+				"http://example.com",
+				"nc example.com 1337",
+				"nc ${host} 1337"
+			]
+		},
+		"points": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 10000,
+			"default": 1000,
+			"description": "The amount of points the challenge is worth from the start"
+		},
+		"decay": {
+			"type": "integer",
+			"minimum": 0,
+			"maximum": 10000,
+			"default": 75,
+			"description": "The percentage of points lost over time"
+		},
+		"min_points": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 1000,
+			"default": 100,
+			"description": "The minimum amount of points the challenge can be worth. min_points must be less than or equal to points."
+		},
+		"flag": {
+			"oneOf": [
+				{
+					"type": "string",
+					"pattern": "^(\\w{2,10}\\{[^}]*\\}|dynamic|null)$",
+					"minLength": 4,
+					"maxLength": 100
+				},
+				{
+					"type": "array",
+					"items": {
+						"oneOf": [
+							{
+								"type": "string",
+								"pattern": "^(\\w{2,10}\\{[^}]*\\}|dynamic|null)$",
+								"minLength": 4,
+								"maxLength": 100
+							},
+							{
+								"type": "object",
+								"required": [
+									"flag"
+								],
+								"properties": {
+									"flag": {
+										"type": "string",
+										"pattern": "^(\\w{2,10}\\{[^}]*\\}|dynamic|null)$",
+										"minLength": 4,
+										"maxLength": 100
+									},
+									"case_sensitive": {
+										"type": "boolean",
+										"default": true,
+										"examples": [
+											true,
+											false
+										],
+										"description": "Whether the flag is case sensitive or not. If false, the flag will be checked case insensitively. Default is true."
+									}
+								}
+							}
+						]
+					},
+					"minItems": 1
+				}
+			],
+			"description": "The flag of the challenge. May be a single string or an array of strings. Each may be 'dynamic', 'null', or a flag like 'flag{...}'. `flag` may be replaced with between 2 and 10 word chars. If case sensitivity is not explicitly specified, the flag is case sensitive.",
+			"examples": [
+				"flag{flag}",
+				[
+					"flag{flag1}",
+					"flag{flag2}"
+				],
+				[
+					{
+						"flag": "flag{flag1}",
+						"case_sensitive": true
+					},
+					{
+						"flag": "flag{flag2}",
+						"case_sensitive": false
+					}
+				]
+			]
+		},
+		"description_location": {
+			"type": "string",
+			"description": "The location of the description file relative to the challenge directory",
+			"default": "description.md",
+			"pattern": "^[a-zA-Z0-9-_\/.]+\\.md$",
+			"examples": [
+				"description.md"
+			]
+		},
+		"dockerfile_locations": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"required": [
+					"location",
+					"context"
+				],
+				"properties": {
+					"location": {
+						"type": "string",
+						"description": "The location of the Dockerfile relative to the challenge directory",
+						"pattern": "^[a-zA-Z0-9-_\/.]+$",
+						"examples": [
+							"src/Dockerfile"
+						]
+					},
+					"context": {
+						"type": "string",
+						"description": "The context of the Dockerfile relative to the challenge directory",
+						"pattern": "^[a-zA-Z0-9-_\/.]+$",
+						"examples": [
+							"src/"
+						]
+					},
+					"identifier": {
+						"type": [
+							"string",
+							"null"
+						],
+						"description": "The identifier of the Dockerfile to suffix the docker image with (None, null, or empty string for no suffix)",
+						"examples": [
+							"None",
+							null
+						]
+					}
+				}
+			},
+			"description": "The locations of the Dockerfiles relative to the challenge directory.\nMultiple Dockerfiles can be specified if the challenge requires multiple images.",
+			"default": []
+		},
+		"handout_dir": {
+			"type": "string",
+			"description": "The location of the handout directory relative to the challenge directory. Handout directory contains all files that are handed out to users (zipped to a single file that are stored in <category>_<slug>.zip in the files directory).",
+			"default": "handout",
+			"pattern": "^[a-zA-Z0-9-_\/]+$",
+			"examples": [
+				"handout"
+			]
+		}
+	}
+}
