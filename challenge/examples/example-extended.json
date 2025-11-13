@@ -18,8 +18,8 @@
         "case_sensitive": true
         },
         {
-            "flag": "flag{d3m0_fl4g_2}",
-            "case_sensitive": false
+        "flag": "flag{d3m0_fl4g_2}",
+        "case_sensitive": false
         }
     ],
     "points": 1000,
