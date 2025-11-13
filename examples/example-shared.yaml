@@ -6,11 +6,10 @@ slug: "demo-challenge"
 author: "The Mikkel"
 category: "misc"
 difficulty: "easy"
-type: "static"
 tags:
   - "demo"
   - "example"
-instanced_type: "none"
+type: "shared"
 flag: "flag{d3m0_fl4g}"
 points: 1000
 min_points: 100

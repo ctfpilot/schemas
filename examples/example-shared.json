@@ -10,8 +10,7 @@
     "demo",
     "example"
   ],
-  "type": "static",
-  "instanced_type": "none",
+  "type": "shared",
   "flag": "flag{d3m0_fl4g}",
   "points": 1000,
   "min_points": 100,

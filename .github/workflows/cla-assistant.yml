@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_ASSISTANT_PAT }}
         with:
-          path-to-signatures: "signatures/schemas/v1/cla.json"
+          path-to-signatures: "signatures/challenge-schema/v1/cla.json"
           path-to-document: "https://github.com/ctfpilot/cla/blob/1a3a56410df569e0672aafd508044da85f194e8b/CLA.md"
 
           # branch should not be protected

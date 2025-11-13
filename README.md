@@ -6,24 +6,24 @@ Both YAML and JSON versions of this schema are used. This README documents every
 
 Examples of the schema in use can be found in the [examples](./examples) directory.
 
-## Quick reference — required fields
+## Quick reference
 
 The schema is an object. At minimum a challenge SHOULD include the following fields:
 
-- `enabled` (boolean) — whether the challenge is enabled. Default: `true`.
-- `name` (string) — human-readable name of the challenge.
-- `slug` (string) — machine-friendly slug. Must match the regex `^[a-z0-9-]+$`.
-- `author` (string) — author or owner of the challenge.
-- `category` (string) — see allowed values below.
-- `difficulty` (string) — see allowed values below.
-- `tags` (array[string]) — freeform tags (pattern documented below).
-- `type` (string) — `static` | `shared` | `instanced`.
-- `instanced_type` (string) — `web` | `tcp` | `none` (useful for `instanced` challenges).
-- `flag` (string | array | array of objects) — one or more flags (see Flags section).
-- `points` (integer) — starting point value (1..10000). Default 1000.
-- `min_points` (integer) — minimum point value (1..1000). Default 100.
+- `enabled` (boolean) - whether the challenge is enabled. Default: `true`.
+- `name` (string) - human-readable name of the challenge.
+- `slug` (string) - machine-friendly slug. Must match the regex `^[a-z0-9-]+$`.
+- `author` (string) - author or owner of the challenge.
+- `category` (string) - [see allowed values](#allowed-enumerations-and-constraints).
+- `difficulty` (string) - [see allowed values](#allowed-enumerations-and-constraints).
+- `tags` (array[string], optional) - freeform tags.
+- `type` (string) - `static` | `shared` | `instanced`.
+- `instanced_type` (string, optional) - `web` | `tcp` | `none` (useful for `instanced` challenges).
+- `flag` (string | array | array of objects) - one or more flags (see Flags section).
+- `points` (integer, optional) - starting point value (1..10000). Default 1000.
+- `min_points` (integer, optional) - minimum point value (1..1000). Default 100.
 
-Fields not required but commonly used: `instanced_name`, `instanced_subdomains`, `connection`, `description_location`, `prerequisites`, `dockerfile_locations`, `handout_dir`, `tags`.
+See all value types in [Field reference](#field-reference-structure-and-examples).
 
 ## Allowed enumerations and constraints
 
@@ -53,14 +53,14 @@ These are the explicit allowed values used by the schema and tooling.
   - `insane`
 
 - `type` (one of):
-  - `static` — challenge is a static artifact (files, puzzles, etc.).
-  - `shared` — external network service; may require a `connection` string. Instance is shared among all teams.
-  - `instanced` — an instance-per-team/service is launched (see `instanced_type`).
+  - `static` - challenge is a static artifact (files, puzzles, etc.).
+  - `shared` - external network service; may require a `connection` string. Instance is shared among all teams.
+  - `instanced` - an instance-per-team/service is launched (see `instanced_type`).
 
 - `instanced_type` (one of):
-  - `web` — an HTTP/web instance.
-  - `tcp` — a plain TCP/port-based instance.
-  - `none` — not instanced / no special instance behavior.
+  - `web` - an HTTP/web instance.
+  - `tcp` - a plain TCP/port-based instance.
+  - `none` - not instanced / no special instance behavior.
 
 - `tags`: each tag is a string and should match the regex: `^[a-zA-Z0-9-_:;? ]+$` (allows letters, numbers, hyphen, underscore, colon, semicolon, question mark and spaces).
 
@@ -71,31 +71,31 @@ These are the explicit allowed values used by the schema and tooling.
 
 ## Field reference (structure and examples)
 
-- `version` (string, optional) — schema version (e.g. `1.0.0` or `1`). Fully optional; if omitted the latest schema version is assumed.
-- `enabled` (boolean) — whether the challenge is active.
-- `name` (string) — e.g. "Demo Challenge".
-- `slug` (string) — e.g. `demo-challenge`.
-- `author` (string) — e.g. `The Mikkel`.
-- `category` (string) — see enumerations above.
-- `difficulty` (string) — see enumerations above.
-- `tags` (array[string]) — e.g. `["demo", "example"]`.
-- `type` (string) — `static`, `shared`, or `instanced`.
-- `instanced_type` (string) — `web`, `tcp`, or `none`.
-- `instanced_name` (string, optional) — slug of the instanced challenge. If omitted the challenge `slug` is typically used.
-- `instanced_subdomains` (array[string], optional) — list of subdomains used for instanced web challenges.  
+- `version` (string, optional) - schema version (e.g. `1.0.0` or `1`). Fully optional; if omitted the latest schema version is assumed.
+- `enabled` (boolean) - whether the challenge is active.
+- `name` (string) - e.g. "Demo Challenge".
+- `slug` (string) - e.g. `demo-challenge`.
+- `author` (string) - e.g. `The Mikkel`.
+- `category` (string) - see enumerations above.
+- `difficulty` (string) - see enumerations above.
+- `tags` (array[string], optional) - e.g. `["demo", "example"]`.
+- `type` (string) - `static`, `shared`, or `instanced`.
+- `instanced_type` (string, optional) - `web`, `tcp`, or `none`.
+- `instanced_name` (string, optional) - slug of the instanced challenge. If omitted the challenge `slug` is typically used.
+- `instanced_subdomains` (array[string], optional) - list of subdomains used for instanced web challenges.  
   Each entry may optionally be prefixed with `web:` or `tcp:` (e.g., `web:api`, `tcp:service`, or just `admin`). The prefix indicates the protocol associated with the subdomain. All entries must match the pattern `^((web|tcp):)?[a-z0-9-]+$`.
-- `connection` (string, optional) — a connection URI or host:port string for `shared` challenges (max length 255).
-- `flag` (string | array | array of objects) — see Flags section below.
-- `points` (integer) — initial points awarded for solving.
-- `min_points` (integer) — floor for dynamic scoring.
-- `decay` (integer, optional) — decay for dynamic scoring. Default: `75`.
-- `description_location` (string) — path to a file with the challenge description (e.g. `description.md`).
-- `prerequisites` (array[string]) — other challenge slugs that must be solved first.
-- `dockerfile_locations` (array[object]) — list of build instructions; each object has:
-  - `context` (string) — build context directory
-  - `location` (string) — path to the Dockerfile
-  - `identifier` (string | null) — optional label identifying the image
-- `handout_dir` (string, optional) — directory with handout files.
+- `connection` (string, optional) - a connection URI or host:port string for `shared` challenges (max length 255).
+- `flag` (string | array | array of objects) - see [Flags section](#flags).
+- `points` (integer, optional) - initial points awarded for solving.
+- `min_points` (integer, optional) - floor for dynamic scoring.
+- `decay` (integer, optional) - decay for dynamic scoring. Default: `75`.
+- `description_location` (string, optional) - path to a file with the challenge description (e.g. `description.md`).
+- `prerequisites` (array[string], optional) - other challenge slugs that must be solved first.
+- `dockerfile_locations` (array[object], optional) - list of build instructions; each object has:
+  - `context` (string) - build context directory
+  - `location` (string) - path to the Dockerfile
+  - `identifier` (string | null, optional) - optional label identifying the image
+- `handout_dir` (string, optional) - directory with handout files.
 
 ## Flags
 
