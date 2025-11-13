@@ -22,7 +22,11 @@
         [
             "@semantic-release/github",
             {
-                "successComment": false
+                "successComment": false,
+                "assets": [
+                    {"path": "schema.json", "label": "Page Schema"},
+                    {"path": "README.md", "label": "Documentation"}
+                ]
             }
         ],
         [
