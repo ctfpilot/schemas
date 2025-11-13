@@ -1,21 +1,28 @@
 {
-    "$schema": "https://raw.githubusercontent.com/ctfpilot/schemas/refs/heads/main/challenge/schema.json",
+    "$schema": "https://raw.githubusercontent.com/ctfpilot/challenge-schema/refs/heads/main/schema.json",
     "enabled": true,
     "name": "Extended Demo Challenge",
     "slug": "extended-demo-challenge",
     "author": "FaNzu",
     "category": "misc",
     "difficulty": "medium",
-    "tags": ["demo", "extended", "example"],
+    "tags": [
+        "demo",
+        "extended",
+        "example"
+    ],
     "type": "instanced",
     "instanced_type": "web",
     "instanced_name": "extended-demo-challenge",
-    "instanced_subdomains": ["app", "api"],
+    "instanced_subdomains": [
+        "app",
+        "api"
+    ],
     "connection": "http://example.com",
     "flag": [
         {
-        "flag": "flag{d3m0_fl4g_1}",
-        "case_sensitive": true
+            "flag": "flag{d3m0_fl4g_1}",
+            "case_sensitive": true
         },
         {
             "flag": "flag{d3m0_fl4g_2}",
@@ -26,12 +33,14 @@
     "decay": 75,
     "min_points": 100,
     "description_location": "description.md",
-    "prerequisites": ["simple-demo-challenge"],
+    "prerequisites": [
+        "simple-demo-challenge"
+    ],
     "dockerfile_locations": [
         {
-        "location": "demo/Dockerfile",
-        "context": "demo/",
-        "identifier": "web"
+            "location": "demo/Dockerfile",
+            "context": "demo/",
+            "identifier": "web"
         }
     ],
     "handout_dir": "handout/"
